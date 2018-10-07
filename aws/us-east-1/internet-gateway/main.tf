@@ -28,3 +28,12 @@ resource "aws_route_table_association" "igw" {
   subnet_id      = "${aws_subnet.igw.id}"
   route_table_id = "${local.vpc_route_table_id}"
 }
+
+resource "aws_eip" "nat" {
+  vpc = true
+}
+
+resource "aws_nat_gateway" "nat" {
+  allocation_id = "${aws_eip.nat.id}"
+  subnet_id     = "${aws_subnet.igw.id}"
+}
