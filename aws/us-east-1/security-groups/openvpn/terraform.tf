@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "showseeker-terraform"
-    key    = "aws/us-east-1/security-groups/terraform.tfstate"
+    key    = "aws/us-east-1/security-groups/openvpn/terraform.tfstate"
     region = "us-east-1"
   }
 }
