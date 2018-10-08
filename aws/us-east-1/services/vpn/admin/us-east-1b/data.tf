@@ -1,5 +1,6 @@
 data "terraform_remote_state" "vpc" {
   backend = "s3"
+
   config {
     bucket = "showseeker-terraform"
     key    = "aws/us-east-1/vpc/terraform.tfstate"
@@ -9,6 +10,7 @@ data "terraform_remote_state" "vpc" {
 
 data "terraform_remote_state" "cidr" {
   backend = "s3"
+
   config {
     bucket = "showseeker-terraform"
     key    = "aws/us-east-1/routing/terraform.tfstate"
@@ -18,6 +20,7 @@ data "terraform_remote_state" "cidr" {
 
 data "terraform_remote_state" "keys" {
   backend = "s3"
+
   config {
     bucket = "showseeker-terraform"
     key    = "aws/us-east-1/ssh-keys/terraform.tfstate"
@@ -27,6 +30,7 @@ data "terraform_remote_state" "keys" {
 
 data "terraform_remote_state" "dns" {
   backend = "s3"
+
   config {
     bucket = "showseeker-terraform"
     key    = "aws/us-east-1/dns/terraform.tfstate"
@@ -36,6 +40,7 @@ data "terraform_remote_state" "dns" {
 
 data "terraform_remote_state" "sg_openvpn" {
   backend = "s3"
+
   config {
     bucket = "showseeker-terraform"
     key    = "aws/us-east-1/security-groups/openvpn/terraform.tfstate"

@@ -1,6 +1,8 @@
 locals {
-  vpc_id = "${data.terraform_remote_state.vpc.vpc_id}"
+  vpc_id   = "${data.terraform_remote_state.vpc.vpc_id}"
   vpc_cidr = "${data.terraform_remote_state.vpc.vpc_cidr}"
+  db_cidr = "${data.terraform_remote_state.cidr.postgres_gitea_us_east_1c}"
+
 }
 
 resource "aws_security_group" "gitea" {
@@ -18,10 +20,28 @@ resource "aws_security_group_rule" "gitea_ssh_in_vpc" {
   security_group_id = "${aws_security_group.gitea.id}"
 }
 
+resource "aws_security_group_rule" "gitea_pg_out" {
+  type              = "egress"
+  from_port         = "5432"
+  to_port           = "5432"
+  protocol          = "tcp"
+  cidr_blocks       = ["${local.db_cidr}"]
+  security_group_id = "${aws_security_group.gitea.id}"
+}
+
 resource "aws_security_group_rule" "gitea_https_in_vpc" {
   type              = "ingress"
   from_port         = "443"
   to_port           = "443"
+  protocol          = "tcp"
+  cidr_blocks       = ["${local.vpc_cidr}"]
+  security_group_id = "${aws_security_group.gitea.id}"
+}
+
+resource "aws_security_group_rule" "gitea_http_in_vpc" {
+  type              = "ingress"
+  from_port         = "80"
+  to_port           = "80"
   protocol          = "tcp"
   cidr_blocks       = ["${local.vpc_cidr}"]
   security_group_id = "${aws_security_group.gitea.id}"

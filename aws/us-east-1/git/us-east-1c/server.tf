@@ -26,7 +26,7 @@ resource "aws_instance" "git_1" {
 
   vpc_security_group_ids = [
     "${data.terraform_remote_state.security_groups.gitea}",
-    "${data.terraform_remote_state.security_groups.postgres}"
+    "${data.terraform_remote_state.security_groups.postgres}",
   ]
 }
 

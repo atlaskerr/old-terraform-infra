@@ -1,10 +1,10 @@
 locals {
-  route_table_id  = "${data.terraform_remote_state.vpc.route_table_id}"
+  route_table_id  = "${data.terraform_remote_state.cidr.public_table_id}"
   vpc_id          = "${data.terraform_remote_state.vpc.vpc_id}"
   vpn_cidr        = "${data.terraform_remote_state.cidr.admin_vpn_us_east_1b}"
   key_name        = "${data.terraform_remote_state.keys.atlas_key_name}"
   sg_openvpn_id   = "${data.terraform_remote_state.sg_openvpn.sg_id}"
-  shseekr_zone_id = "${data.terraform_remote_state.dns.shseekr_zone_id}"
+  shseekr_zone_id = "${data.terraform_remote_state.dns.shseekr_public_zone_id}"
 }
 
 resource "aws_route_table_association" "vpn_us_east_1b" {

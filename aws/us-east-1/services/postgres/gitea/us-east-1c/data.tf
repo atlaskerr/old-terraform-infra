@@ -38,22 +38,12 @@ data "terraform_remote_state" "dns" {
   }
 }
 
-data "terraform_remote_state" "igw" {
+data "terraform_remote_state" "security_groups" {
   backend = "s3"
 
   config {
     bucket = "showseeker-terraform"
-    key    = "aws/us-east-1/internet-gateway/terraform.tfstate"
-    region = "us-east-1"
-  }
-}
-
-data "terraform_remote_state" "sg_gitea" {
-  backend = "s3"
-
-  config {
-    bucket = "showseeker-terraform"
-    key    = "aws/us-east-1/security-groups/gitea/terraform.tfstate"
+    key    = "aws/us-east-1/security-groups/postgres/gitea/terraform.tfstate"
     region = "us-east-1"
   }
 }

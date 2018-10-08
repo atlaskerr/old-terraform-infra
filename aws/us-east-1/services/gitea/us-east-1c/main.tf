@@ -1,10 +1,12 @@
 locals {
-  route_table_id  = "${data.terraform_remote_state.vpc.route_table_id}"
   vpc_id          = "${data.terraform_remote_state.vpc.vpc_id}"
+  route_table_id  = "${data.terraform_remote_state.cidr.private_table_id}"
   git_cidr        = "${data.terraform_remote_state.cidr.git_us_east_1c}"
   key_name        = "${data.terraform_remote_state.keys.atlas_key_name}"
-  sg_gitea_id     = "${data.terraform_remote_state.sg_gitea.sg_id}"
+  sg_id           = "${data.terraform_remote_state.sg_gitea.sg_id}"
   shseekr_zone_id = "${data.terraform_remote_state.dns.shseekr_private_zone_id}"
+
+  vol_id = "${data.terraform_remote_state.storage.gitea_repo_storage_vol_id}"
 }
 
 resource "aws_route_table_association" "git_us_east_1c" {
@@ -29,11 +31,17 @@ resource "aws_instance" "git" {
   key_name               = "${local.key_name}"
   instance_type          = "t3.micro"
   subnet_id              = "${aws_subnet.git_us_east_1c.id}"
-  vpc_security_group_ids = ["${local.sg_gitea_id}"]
+  vpc_security_group_ids = ["${local.sg_id}"]
 
   tags {
     Name = "Gitea"
   }
+}
+
+resource "aws_volume_attachment" "repository_storage" {
+  device_name = "/dev/sdb"
+  instance_id = "${aws_instance.git.id}"
+  volume_id   = "${local.vol_id}"
 }
 
 resource "aws_route53_record" "git" {
