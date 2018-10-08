@@ -1,8 +1,7 @@
 locals {
   vpc_id   = "${data.terraform_remote_state.vpc.vpc_id}"
   vpc_cidr = "${data.terraform_remote_state.vpc.vpc_cidr}"
-  db_cidr = "${data.terraform_remote_state.cidr.postgres_gitea_us_east_1c}"
-
+  db_cidr  = "${data.terraform_remote_state.cidr.postgres_gitea_us_east_1c}"
 }
 
 resource "aws_security_group" "gitea" {
