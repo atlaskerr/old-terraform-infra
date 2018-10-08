@@ -21,3 +21,11 @@ output "git_us_east_1c" {
 output "postgres_gitea_us_east_1c" {
   value = "192.168.4.0/24"
 }
+
+output "concourse_us_east_1c" {
+  value = "192.168.5.0/24"
+}
+
+output "postgres_concourse_us_east_1c" {
+  value = "192.168.6.0/24"
+}

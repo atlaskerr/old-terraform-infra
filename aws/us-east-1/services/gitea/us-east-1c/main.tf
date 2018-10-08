@@ -46,7 +46,7 @@ resource "aws_volume_attachment" "repository_storage" {
 
 resource "aws_route53_record" "git" {
   zone_id = "${local.shseekr_zone_id}"
-  name    = "git.shseekr.com"
+  name    = "git.showseeker.com"
   type    = "A"
   ttl     = "300"
   records = ["${aws_instance.git.private_ip}"]

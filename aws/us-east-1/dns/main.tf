@@ -3,7 +3,7 @@ locals {
 }
 
 resource "aws_route53_zone" "private" {
-  name    = "shseekr.com"
+  name    = "showseeker.com"
   comment = "ShowSeeker Internal DNS"
   vpc_id  = "${local.vpc_id}"
 }
