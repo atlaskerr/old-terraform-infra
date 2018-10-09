@@ -6,10 +6,12 @@ output "private_table_id" {
   value = "${aws_route_table.private.id}"
 }
 
+# Public Subnets
 output "igw" {
   value = "192.168.1.0/24"
 }
 
+# Private Subnets
 output "admin_vpn_us_east_1b" {
   value = "192.168.2.0/24"
 }
@@ -28,4 +30,8 @@ output "concourse_us_east_1c" {
 
 output "postgres_concourse_us_east_1c" {
   value = "192.168.6.0/24"
+}
+
+output "postgres_clair_us_east_1c" {
+  value = "192.168.7.0/24"
 }
