@@ -38,3 +38,13 @@ resource "aws_ebs_volume" "postgres_concourse_db" {
     Name = "Concourse Postgres DB"
   }
 }
+
+resource "aws_ebs_volume" "postgres_clair_db" {
+  availability_zone = "us-east-1c"
+  type              = "gp2"
+  size              = "20"
+
+  tags {
+    Name = "Clair Postgres DB"
+  }
+}

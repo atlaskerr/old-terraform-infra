@@ -14,3 +14,7 @@ output "postgres_gitea_db_vol_id" {
 output "postgres_concourse_db_vol_id" {
   value = "${aws_ebs_volume.postgres_concourse_db.id}"
 }
+
+output "postgres_clair_db_vol_id" {
+  value = "${aws_ebs_volume.postgres_clair_db.id}"
+}
