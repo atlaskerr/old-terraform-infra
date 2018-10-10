@@ -11,7 +11,7 @@ resource "aws_security_group" "postgres_clair" {
 locals {
   sg_id         = "${aws_security_group.postgres_clair.id}"
   vpn_cidr      = "${data.terraform_remote_state.cidr.admin_vpn_us_east_1b}"
-  clair_db_cidr = "${data.terraform_remote_state.cidr.postgres_clair_us_east_1c}"
+  clair_cidr = "${data.terraform_remote_state.cidr.clair_us_east_1c}"
 }
 
 resource "aws_security_group_rule" "pg_vpn_in" {
@@ -40,7 +40,7 @@ resource "aws_security_group_rule" "pg_clair_in" {
   from_port         = "5432"
   to_port           = "5432"
   protocol          = "tcp"
-  cidr_blocks       = ["${local.clair_db_cidr}"]
+  cidr_blocks       = ["${local.clair_cidr}"]
   security_group_id = "${local.sg_id}"
 }
 
@@ -50,7 +50,7 @@ resource "aws_security_group_rule" "pg_clair_out" {
   from_port         = "5432"
   to_port           = "5432"
   protocol          = "tcp"
-  cidr_blocks       = ["${local.clair_db_cidr}"]
+  cidr_blocks       = ["${local.clair_cidr}"]
   security_group_id = "${local.sg_id}"
 }
 

@@ -35,3 +35,7 @@ output "postgres_concourse_us_east_1c" {
 output "postgres_clair_us_east_1c" {
   value = "192.168.7.0/24"
 }
+
+output "clair_us_east_1c" {
+  value = "192.168.8.0/24"
+}
