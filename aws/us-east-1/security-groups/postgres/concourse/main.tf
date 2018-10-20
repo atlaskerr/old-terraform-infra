@@ -6,6 +6,9 @@ resource "aws_security_group" "postgres_concourse" {
   name        = "postgres_concourse"
   description = "Postgres for Concourse Security Group"
   vpc_id      = "${local.vpc_id}"
+  tags {
+    Name = "Postgresql Concourse"
+  }
 }
 
 locals {

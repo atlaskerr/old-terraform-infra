@@ -6,6 +6,9 @@ resource "aws_security_group" "postgres_clair" {
   name        = "postgres_clair"
   description = "Postgres for Clair Security Group"
   vpc_id      = "${local.vpc_id}"
+  tags {
+    Name = "Postgresql Clair"
+  }
 }
 
 locals {

@@ -11,11 +11,11 @@ output "igw" {
   value = "192.168.1.0/24"
 }
 
-# Private Subnets
 output "admin_vpn_us_east_1b" {
   value = "192.168.2.0/24"
 }
 
+# Private Subnets
 output "git_us_east_1c" {
   value = "192.168.3.0/24"
 }
@@ -38,4 +38,8 @@ output "postgres_clair_us_east_1c" {
 
 output "clair_us_east_1c" {
   value = "192.168.8.0/24"
+}
+
+output "ldap_us_east_1b" {
+  value = "192.168.9.0/24"
 }
