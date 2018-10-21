@@ -43,3 +43,11 @@ output "clair_us_east_1c" {
 output "ldap_us_east_1b" {
   value = "192.168.9.0/24"
 }
+
+output "postgres_notary_us_east_1c" {
+  value = "192.168.10.0/24"
+}
+
+output "notary_us_east_1c" {
+  value = "192.168.11.0/24"
+}
