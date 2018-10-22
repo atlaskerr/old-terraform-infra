@@ -15,6 +15,7 @@ locals {
   sg_id    = "${aws_security_group.postgres_notary.id}"
   vpn_cidr = "${data.terraform_remote_state.cidr.admin_vpn_us_east_1b}"
   notarysigner_cidr  = "${data.terraform_remote_state.cidr.notarysigner_us_east_1c}"
+  notaryserver_cidr  = "${data.terraform_remote_state.cidr.notary_us_east_1c}"
 }
 
 resource "aws_security_group_rule" "pg_vpn_in" {
@@ -27,13 +28,23 @@ resource "aws_security_group_rule" "pg_vpn_in" {
   security_group_id = "${local.sg_id}"
 }
 
-resource "aws_security_group_rule" "pg_notary_in" {
-  description       = "Allow Postgres port 5432 traffic from Notary Server subnet"
+resource "aws_security_group_rule" "pg_notarysigner_in" {
+  description       = "Allow Postgres port 5432 traffic from Notary Signer subnet"
   type              = "ingress"
   from_port         = "5432"
   to_port           = "5432"
   protocol          = "tcp"
   cidr_blocks       = ["${local.notarysigner_cidr}"]
+  security_group_id = "${local.sg_id}"
+}
+
+resource "aws_security_group_rule" "pg_notaryserver_in" {
+  description       = "Allow Postgres port 5432 traffic from Notary Signer subnet"
+  type              = "ingress"
+  from_port         = "5432"
+  to_port           = "5432"
+  protocol          = "tcp"
+  cidr_blocks       = ["${local.notaryserver_cidr}"]
   security_group_id = "${local.sg_id}"
 }
 
