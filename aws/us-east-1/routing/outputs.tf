@@ -48,6 +48,10 @@ output "postgres_notary_us_east_1c" {
   value = "192.168.10.0/24"
 }
 
-output "notary_us_east_1c" {
+output "notarysigner_us_east_1c" {
   value = "192.168.11.0/24"
+}
+
+output "notary_us_east_1c" {
+  value = "192.168.12.0/24"
 }
