@@ -1,7 +1,7 @@
 locals {
-  vpc_id   = "${data.terraform_remote_state.vpc.vpc_id}"
-  vpc_cidr = "${data.terraform_remote_state.vpc.vpc_cidr}"
-  db_cidr  = "${data.terraform_remote_state.cidr.postgres_notary_us_east_1c}"
+  vpc_id    = "${data.terraform_remote_state.vpc.vpc_id}"
+  vpc_cidr  = "${data.terraform_remote_state.vpc.vpc_cidr}"
+  db_cidr   = "${data.terraform_remote_state.cidr.postgres_notary_us_east_1c}"
   ldap_cidr = "${data.terraform_remote_state.cidr.ldap_us_east_1b}"
 }
 
@@ -9,6 +9,7 @@ resource "aws_security_group" "notaryserver" {
   name        = "notaryserver"
   description = "Notary Server Security Group"
   vpc_id      = "${local.vpc_id}"
+
   tags {
     Name = "Notary Security Group"
   }

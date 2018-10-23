@@ -1,11 +1,11 @@
 locals {
   vpc_id          = "${data.terraform_remote_state.vpc.vpc_id}"
   route_table_id  = "${data.terraform_remote_state.cidr.private_table_id}"
-  ci_cidr        = "${data.terraform_remote_state.cidr.concourse_us_east_1c}"
+  ci_cidr         = "${data.terraform_remote_state.cidr.concourse_us_east_1c}"
   key_name        = "${data.terraform_remote_state.keys.atlas_key_name}"
   sg_id           = "${data.terraform_remote_state.sg_concourse.sg_id}"
   shseekr_zone_id = "${data.terraform_remote_state.dns.shseekr_private_zone_id}"
-  vol_id = "${data.terraform_remote_state.storage.concourse_volume_storage_vol_id}"
+  vol_id          = "${data.terraform_remote_state.storage.concourse_volume_storage_vol_id}"
 }
 
 resource "aws_subnet" "ci_us_east_1c" {
@@ -24,7 +24,6 @@ resource "aws_route_table_association" "ci_us_east_1c" {
   subnet_id      = "${aws_subnet.ci_us_east_1c.id}"
   route_table_id = "${local.route_table_id}"
 }
-
 
 resource "aws_instance" "ci" {
   ami                    = "${data.aws_ami.centos.id}"

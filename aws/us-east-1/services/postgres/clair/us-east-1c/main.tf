@@ -20,16 +20,14 @@ resource "aws_subnet" "postgres_clair_us_east_1c" {
   }
 }
 
-
 locals {
-  subnet_id      = "${aws_subnet.postgres_clair_us_east_1c.id}"
+  subnet_id = "${aws_subnet.postgres_clair_us_east_1c.id}"
 }
 
 resource "aws_route_table_association" "postgres_clair_us_east_1c" {
   subnet_id      = "${local.subnet_id}"
   route_table_id = "${local.route_table_id}"
 }
-
 
 resource "aws_instance" "postgres_clair_db" {
   ami                    = "${data.aws_ami.centos.id}"

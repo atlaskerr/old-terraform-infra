@@ -9,6 +9,7 @@ resource "aws_security_group" "gitea" {
   name        = "gitea"
   description = "Gitea Security Group"
   vpc_id      = "${local.vpc_id}"
+
   tags {
     Name = "Gitea"
   }

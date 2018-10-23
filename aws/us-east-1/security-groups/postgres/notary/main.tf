@@ -6,16 +6,17 @@ resource "aws_security_group" "postgres_notary" {
   name        = "postgres_notary"
   description = "Postgres for Notary Security Group"
   vpc_id      = "${local.vpc_id}"
+
   tags {
     Name = "Postgresql Notary"
   }
 }
 
 locals {
-  sg_id    = "${aws_security_group.postgres_notary.id}"
-  vpn_cidr = "${data.terraform_remote_state.cidr.admin_vpn_us_east_1b}"
-  notarysigner_cidr  = "${data.terraform_remote_state.cidr.notarysigner_us_east_1c}"
-  notaryserver_cidr  = "${data.terraform_remote_state.cidr.notary_us_east_1c}"
+  sg_id             = "${aws_security_group.postgres_notary.id}"
+  vpn_cidr          = "${data.terraform_remote_state.cidr.admin_vpn_us_east_1b}"
+  notarysigner_cidr = "${data.terraform_remote_state.cidr.notarysigner_us_east_1c}"
+  notaryserver_cidr = "${data.terraform_remote_state.cidr.notary_us_east_1c}"
 }
 
 resource "aws_security_group_rule" "pg_vpn_in" {

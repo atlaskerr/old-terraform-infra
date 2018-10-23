@@ -6,6 +6,7 @@ resource "aws_security_group" "postgres_gitea" {
   name        = "postgres_gitea"
   description = "Postgres for Gitea Security Group"
   vpc_id      = "${local.vpc_id}"
+
   tags {
     Name = "Postgresql Gitea"
   }

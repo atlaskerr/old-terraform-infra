@@ -8,12 +8,13 @@ resource "aws_security_group" "ldap" {
   name        = "ldap"
   description = "LDAP Security Group"
   vpc_id      = "${local.vpc_id}"
+
   tags {
     Name = "389 Directory Server"
   }
 }
 
-resource "aws_security_group_rule" "in_ssh_vpn"{
+resource "aws_security_group_rule" "in_ssh_vpn" {
   description       = "Allow all SSH from VPN"
   type              = "ingress"
   from_port         = "22"

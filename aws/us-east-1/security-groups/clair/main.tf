@@ -8,6 +8,7 @@ resource "aws_security_group" "clair" {
   name        = "clair"
   description = "Concourse Security Group"
   vpc_id      = "${local.vpc_id}"
+
   tags {
     Name = "Clair"
   }

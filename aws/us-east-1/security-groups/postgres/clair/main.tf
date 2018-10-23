@@ -6,14 +6,15 @@ resource "aws_security_group" "postgres_clair" {
   name        = "postgres_clair"
   description = "Postgres for Clair Security Group"
   vpc_id      = "${local.vpc_id}"
+
   tags {
     Name = "Postgresql Clair"
   }
 }
 
 locals {
-  sg_id         = "${aws_security_group.postgres_clair.id}"
-  vpn_cidr      = "${data.terraform_remote_state.cidr.admin_vpn_us_east_1b}"
+  sg_id      = "${aws_security_group.postgres_clair.id}"
+  vpn_cidr   = "${data.terraform_remote_state.cidr.admin_vpn_us_east_1b}"
   clair_cidr = "${data.terraform_remote_state.cidr.clair_us_east_1c}"
 }
 
