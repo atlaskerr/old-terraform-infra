@@ -58,3 +58,13 @@ resource "aws_ebs_volume" "postgres_notary_db" {
     Name = "Notary Postgres DB"
   }
 }
+
+resource "aws_ebs_volume" "postgres_harbor_db" {
+  availability_zone = "us-east-1c"
+  type              = "gp2"
+  size              = "20"
+
+  tags {
+    Name = "Harbor Postgres DB"
+  }
+}

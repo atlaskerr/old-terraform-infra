@@ -22,3 +22,7 @@ output "postgres_clair_db_vol_id" {
 output "postgres_notary_db_vol_id" {
   value = "${aws_ebs_volume.postgres_notary_db.id}"
 }
+
+output "postgres_harbor_db_vol_id" {
+  value = "${aws_ebs_volume.postgres_harbor_db.id}"
+}
