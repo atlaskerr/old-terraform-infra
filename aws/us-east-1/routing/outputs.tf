@@ -59,3 +59,7 @@ output "notary_us_east_1c" {
 output "postgres_harbor_us_east_1c" {
   value = "192.168.13.0/24"
 }
+
+output "harbor_us_east_1c" {
+  value = "192.168.14.0/24"
+}
