@@ -42,6 +42,15 @@ resource "aws_security_group_rule" "https_in_vpc" {
   security_group_id = "${aws_security_group.harbor.id}"
 }
 
+resource "aws_security_group_rule" "notary_in_vpc" {
+  type              = "ingress"
+  from_port         = "4443"
+  to_port           = "4443"
+  protocol          = "tcp"
+  cidr_blocks       = ["${local.vpc_cidr}"]
+  security_group_id = "${aws_security_group.harbor.id}"
+}
+
 resource "aws_security_group_rule" "http_out_all" {
   type              = "egress"
   from_port         = "80"

@@ -15,7 +15,7 @@ resource "aws_security_group" "postgres_harbor" {
 locals {
   sg_id       = "${aws_security_group.postgres_harbor.id}"
   vpn_cidr    = "${data.terraform_remote_state.cidr.admin_vpn_us_east_1b}"
-#  harbor_cidr = "${data.terraform_remote_state.cidr.harbor_us_east_1c}"
+  harbor_cidr = "${data.terraform_remote_state.cidr.harbor_us_east_1c}"
 }
 
 resource "aws_security_group_rule" "pg_vpn_in" {
@@ -28,15 +28,15 @@ resource "aws_security_group_rule" "pg_vpn_in" {
   security_group_id = "${local.sg_id}"
 }
 
-#resource "aws_security_group_rule" "pg_harbor_in" {
-#  description       = "Allow Postgres port 5432 traffic from Harbor subnet"
-#  type              = "ingress"
-#  from_port         = "5432"
-#  to_port           = "5432"
-#  protocol          = "tcp"
-#  cidr_blocks       = ["${local.harbor_cidr}"]
-#  security_group_id = "${local.sg_id}"
-#}
+resource "aws_security_group_rule" "pg_harbor_in" {
+  description       = "Allow Postgres port 5432 traffic from Harbor subnet"
+  type              = "ingress"
+  from_port         = "5432"
+  to_port           = "5432"
+  protocol          = "tcp"
+  cidr_blocks       = ["${local.harbor_cidr}"]
+  security_group_id = "${local.sg_id}"
+}
 
 resource "aws_security_group_rule" "ssh_in_vpn" {
   description       = "Allow SSH port 22 traffic from VPN subnet"
