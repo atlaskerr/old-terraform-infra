@@ -40,8 +40,9 @@ data "aws_iam_policy_document" "harbor_registry" {
 
 data "aws_iam_policy_document" "harbor_assume_role" {
   statement {
-    effect     = "Allow"
-    actions    = ["sts:AssumeRole"]
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+
     principals {
       type        = "Service"
       identifiers = ["ec2.amazonaws.com"]

@@ -16,7 +16,7 @@ resource "aws_iam_role" "harbor_registry" {
 
 resource "aws_iam_policy_attachment" "harbor_registry" {
   name       = "harbor-attachment"
-  roles       = ["${aws_iam_role.harbor_registry.name}"]
+  roles      = ["${aws_iam_role.harbor_registry.name}"]
   policy_arn = "${aws_iam_policy.harbor_registry.arn}"
 }
 

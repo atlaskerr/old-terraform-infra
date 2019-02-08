@@ -1,11 +1,11 @@
 locals {
-  vpc_id          = "${data.terraform_remote_state.vpc.vpc_id}"
-  route_table_id  = "${data.terraform_remote_state.cidr.private_table_id}"
-  ci_cidr         = "${data.terraform_remote_state.cidr.concourse_us_east_1c}"
-  key_name        = "${data.terraform_remote_state.keys.atlas_key_name}"
-  sg_id           = "${data.terraform_remote_state.sg_concourse.sg_id}"
-  shseekr_zone_id = "${data.terraform_remote_state.dns.shseekr_private_zone_id}"
-  vol_id          = "${data.terraform_remote_state.storage.concourse_volume_storage_vol_id}"
+  vpc_id         = "${data.terraform_remote_state.vpc.vpc_id}"
+  route_table_id = "${data.terraform_remote_state.cidr.private_table_id}"
+  ci_cidr        = "${data.terraform_remote_state.cidr.concourse_us_east_1c}"
+  key_name       = "${data.terraform_remote_state.keys.atlas_key_name}"
+  sg_id          = "${data.terraform_remote_state.sg_concourse.sg_id}"
+  zone_id        = "${data.terraform_remote_state.dns.private_zone_id}"
+  vol_id         = "${data.terraform_remote_state.storage.concourse_volume_storage_vol_id}"
 }
 
 resource "aws_subnet" "ci_us_east_1c" {
@@ -44,7 +44,7 @@ resource "aws_volume_attachment" "ci_volume_storage" {
 }
 
 resource "aws_route53_record" "ci" {
-  zone_id = "${local.shseekr_zone_id}"
+  zone_id = "${local.zone_id}"
   name    = "ci.showseeker.com"
   type    = "A"
   ttl     = "300"
